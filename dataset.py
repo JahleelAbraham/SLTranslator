@@ -15,9 +15,8 @@ class ASLDataset(Dataset):
     def __init__(self, path, transform=None, target_transform=None):
         read = pd.read_csv(path).to_numpy()
 
-        for i in range(0, len(read)):
-            self.data = list(map(delete_label, read))
-            self.labels = list(map(extract_label, read))
+        self.data = list(map(delete_label, read))
+        self.labels = list(map(extract_label, read))
 
         self.transform = transform
         self.target_transform = target_transform
@@ -26,4 +25,4 @@ class ASLDataset(Dataset):
         return len(self.data)
 
     def __getitem__(self, i):
-        return np.delete(self.data[i], 0), self.data[i][0]
+        return self.data[i].reshape((28, 28)), self.labels[i]
