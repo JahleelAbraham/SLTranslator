@@ -10,7 +10,7 @@ def make_loss_plot(epochs, losses):
     plt.show()
 
 
-def view_classify(img, ps):
+def view_classify(img, ps, labels):
     ''' Function for viewing an image and it's predicted classes.
     '''
     ps = ps.data.numpy().squeeze()
@@ -18,10 +18,10 @@ def view_classify(img, ps):
     fig, (ax1, ax2) = plt.subplots(figsize=(6,9), ncols=2)
     ax1.imshow(img.resize_(1, 28, 28).numpy().squeeze(), cmap='gray')
     ax1.axis('off')
-    ax2.barh(np.arange(10), ps)
+    ax2.barh(np.arange(26), ps)
     ax2.set_aspect(0.1)
-    ax2.set_yticks(np.arange(10))
-    ax2.set_yticklabels(np.arange(10))
+    ax2.set_yticks(np.arange(26))
+    ax2.set_yticklabels(labels)
     ax2.set_title('Class Probability')
     ax2.set_xlim(0, 1.1)
     plt.tight_layout()

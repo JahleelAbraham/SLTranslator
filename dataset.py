@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from PIL import Image
 from torch.utils.data import Dataset
 
 
@@ -17,7 +18,6 @@ class ASLDataset(Dataset):
 
         self.data = list(map(delete_label, read))
         self.labels = list(map(extract_label, read))
-
         self.transform = transform
         self.target_transform = target_transform
 
@@ -25,4 +25,9 @@ class ASLDataset(Dataset):
         return len(self.data)
 
     def __getitem__(self, i):
-        return self.data[i].reshape((28, 28)), self.labels[i]
+        transformed = Image.fromarray(np.array(self.data[i].reshape(28, 28), dtype=np.uint8))
+
+        if self.transform is not None:
+            transformed = self.transform(transformed)
+
+        return transformed, self.labels[i]

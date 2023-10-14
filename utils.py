@@ -11,6 +11,16 @@ def set_seeds(seed):
     random.seed(seed)
     np.random.seed(seed)
 
+def predict_by_max_logit(logits):
+    return torch.argmax(logits, dim=-1)
+
+
+def compute_accuracy_from_predictions(predictions, labels):
+    """
+    Compute classification accuracy.
+    """
+    return torch.mean(torch.eq(labels, predictions).float())
+
 def print_data(path):
     read = pd.read_csv(path).to_numpy()
 
@@ -27,3 +37,4 @@ def delete_label(item):
 
 def extract_label(arr):
     return arr[0]
+
