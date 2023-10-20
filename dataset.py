@@ -9,7 +9,10 @@ def delete_label(item):
 
 
 def extract_label(arr):
-    return arr[0]
+    label = arr[0]
+    if label > 9:
+        return label - 1
+    return label
 
 
 class ASLDataset(Dataset):
