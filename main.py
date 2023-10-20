@@ -86,7 +86,7 @@ optimizer = optim.SGD(model.parameters(), lr=0.003, momentum=0.9)
 
 # train the model
 time_start = time()  # set a timer
-epochs = 100  # number of training epochs
+epochs = 10  # number of training epochs
 training_losses = []
 for e in range(epochs):
     epoch_losses = []
@@ -103,14 +103,14 @@ for e in range(epochs):
     training_losses.append(epoch_loss)
     print("Epoch {} - Loss: {}".format(e + 1, epoch_loss))
 
-print("\nTraining Time (in minutes) = {}".format((time() - time_start) / 60 ))
+print("\nTraining Time (in minutes) = {}".format((time() - time_start) / 60))
 
 
 # plot the loss vs epoch
 make_loss_plot(epochs, training_losses)
 
 
-# get the first batch of test examples so we can examine them
+# get the first batch of test examples, so we can examine them
 iterator = iter(test_loader)
 signs, labels = next(iterator)
 
@@ -134,4 +134,5 @@ with torch.no_grad():  # don't need gradients for testing
             logits = model(signs)
             predictions.append(predict_by_max_logit(logits))  # make prediction on the class that has the highest value
 
-print("Accuracy = {0:0.1f}%".format(compute_accuracy_from_predictions(torch.hstack(predictions), torch.hstack(labels_test)) * 100.0))
+print("Accuracy = {0:0.1f}%"
+      .format(compute_accuracy_from_predictions(torch.hstack(predictions), torch.hstack(labels_test)) * 100.0))

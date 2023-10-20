@@ -5,8 +5,7 @@ import numpy as np
 def make_loss_plot(epochs, losses):
     plt.plot(range(epochs), losses)
     plt.ylabel('Loss')
-    plt.xlabel('Epoch');
-    plt.savefig('plot_losses.pdf')
+    plt.xlabel('Epoch')
     plt.show()
 
 
