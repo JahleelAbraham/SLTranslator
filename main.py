@@ -4,9 +4,11 @@ import matplotlib.pyplot as plt
 
 from PIL import Image
 from hands import render
+from dataset import ASLDatasetNoLabel
 from model import NeuralNetwork
 from torchvision import transforms
 from utils import predict_by_max_logit
+from torch.utils.data import DataLoader
 from train import train
 
 alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M",
@@ -29,11 +31,15 @@ model.eval()
 
 def getModelResult(img):
     # FIXME: This currently crashes the model. More processing must be done
-    read = Image.fromarray(np.array(img.reshape(28, 28), dtype=np.uint8))
-    processed = transform(read)
+    sett = ASLDatasetNoLabel(np.array(img.reshape(28, 28), dtype=np.uint8), transform=transform)
+    set_loader = DataLoader(sett)
+
+    iterator = iter(set_loader)
+    signs = next(iterator)
 
     with torch.no_grad():
-        logits = model(processed)
+        logits = model(signs[0])
+        print(alphabet[predict_by_max_logit(logits)])
         return alphabet[predict_by_max_logit(logits)]
 
 

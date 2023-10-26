@@ -34,3 +34,20 @@ class ASLDataset(Dataset):
             transformed = self.transform(transformed)
 
         return transformed, self.labels[i]
+
+
+class ASLDatasetNoLabel(Dataset):
+    def __init__(self, data, transform=None):
+        self.data = data
+        self.transform = transform
+
+    def __len__(self):
+        return 1
+
+    def __getitem__(self, i):
+        transformed = Image.fromarray(self.data)
+
+        if self.transform is not None:
+            transformed = self.transform(transformed)
+
+        return [transformed]

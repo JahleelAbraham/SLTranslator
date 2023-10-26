@@ -60,7 +60,7 @@ def render(triggerModel):
 
             gray = cv2.cvtColor(cv2.flip(cropped, 1), cv2.COLOR_BGR2GRAY)
             resize = cv2.resize(gray, (28, 28))
-            cv2.putText(frame, triggerModel(resize), (25, 100), cv2.FONT_HERSHEY_COMPLEX, 0.9, (255, 255, 255), 2)
+            cv2.putText(frame, triggerModel(resize), (50, 100), cv2.FONT_HERSHEY_COMPLEX, 0.9, (100, 0, 255), 2)
             cv2.imshow("Smol", resize)
 
     cv2.rectangle(frame, (0 + padding, 0 + padding), (w - padding, h - padding), (255, 255, 255), 2)
