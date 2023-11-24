@@ -117,3 +117,40 @@ def isolate(img):
     cv2.imshow("contours", bContours)
 
     return thresh
+
+
+
+
+
+
+
+def normalize_and_move(hand_landmarks, x_min, y_min, x_max, y_max, frame_width, frame_height):
+    box_width, box_height = x_max - x_min, y_max - y_min
+    scale_factor = box_height if box_height > box_width else box_width
+
+    normalized_landmarks = []
+    for lm in hand_landmarks:
+        # Normalize coordinates
+        x_norm = (lm.x * frame_width - x_min) / scale_factor
+        y_norm = (lm.y * frame_height - y_min) / scale_factor
+        # Move to bottom-left corner
+        x_moved = x_norm
+        y_moved = frame_height / scale_factor - y_norm
+        normalized_landmarks.append((x_moved, y_moved))
+
+    return normalized_landmarks
+
+def render(triggerModel):
+    _, frame = cap.read()
+    # ... [Rest of your existing code] ...
+
+    if hand_landmarks:
+        for handLMs in hand_landmarks:
+            # ... [Existing code to calculate x_min, y_min, x_max, y_max] ...
+
+            # Normalize and move landmarks
+            normalized_landmarks = normalize_and_move(handLMs.landmark, x_min, y_min, x_max, y_max, w, h)
+            for norm_lm in normalized_landmarks:
+                cv2.circle(frame, (int(norm_lm[0]), int(norm_lm[1])), 5, (255, 0, 0), -1)
+
+    # ... [Rest of your existing code] ...
