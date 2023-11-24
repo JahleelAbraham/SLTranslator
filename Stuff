@@ -142,3 +142,43 @@ def render(triggerModel):
             mp_drawing.draw_landmarks(frame, handLMs, mphands.HAND_CONNECTIONS)
 
     # Rest of your code...
+
+
+
+
+
+
+
+def adjust_box(x_min, y_min, x_max, y_max, frame_width, frame_height):
+    box_width, box_height = x_max - x_min, y_max - y_min
+    scale_factor = box_height / frame_height if box_height > box_width else box_width / frame_width
+
+    new_width, new_height = int(box_width / scale_factor), int(box_height / scale_factor)
+    x_min_new, y_min_new = 0, frame_height - new_height
+    x_max_new, y_max_new = new_width, frame_height
+
+    return x_min_new, y_min_new, x_max_new, y_max_new
+
+def render(triggerModel):
+    _, frame = cap.read()
+    framergb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    result = hands.process(framergb)
+    hand_landmarks = result.multi_hand_landmarks
+
+    if hand_landmarks:
+        for handLMs in hand_landmarks:
+            x_max, y_max = 0, 0
+            x_min, y_min = w, h
+
+            for lm in handLMs.landmark:
+                x, y = int(lm.x * w), int(lm.y * h)
+                x_max, x_min = max(x, x_max), min(x, x_min)
+                y_max, y_min = max(y, y_max), min(y, y_min)
+
+            # Call the new function to adjust the box
+            x_min_new, y_min_new, x_max_new, y_max_new = adjust_box(x_min, y_min, x_max, y_max, w, h)
+            cv2.rectangle(frame, (x_min_new, y_min_new), (x_max_new, y_max_new), (0, 255, 0), 2)
+
+            mp_drawing.draw_landmarks(frame, handLMs, mphands.HAND_CONNECTIONS)
+
+    # Rest of your code...
