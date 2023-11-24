@@ -1,0 +1,20 @@
+landmark_coordinates = []  # Initialize an empty list for storing landmarks
+
+    if hand_landmarks:
+        for handLMs in hand_landmarks:
+            hand_coords = []  # List to store coordinates of a single hand
+
+            for lm in handLMs.landmark:
+                x, y = int(lm.x * w), int(lm.y * h)
+                hand_coords.append((x, y))  # Add landmark coordinates to the list
+
+                # ... [existing bounding box and drawing code]
+
+            landmark_coordinates.append(hand_coords)  # Add this hand's landmarks to the main list
+
+    # ... [rest of the existing code]
+
+    print(landmark_coordinates)  # Print the list of all landmarks
+
+    # Optionally, you can return the list
+    # return landmark_coordinates
