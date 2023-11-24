@@ -85,3 +85,22 @@ def render(triggerModel):
                 # Use the processed coordinates for further application logic if needed
 
             # Draw landmarks on the original frame
+
+
+
+
+    if hand_landmarks:
+        for handLMs in hand_landmarks:
+            for lm in handLMs.landmark:
+                # Process each landmark
+                x, y = lm.x * w, lm.y * h
+                x = (x - x_sub) / divisor
+                y = (y - y_sub) / divisor
+
+                # Ensure x and y are within frame bounds
+                x = max(0, min(int(x), w - 1))
+                y = max(0, min(int(y), h - 1))
+
+                # Use the processed coordinates for further application logic if needed
+
+            # Draw landmarks on the original frame
