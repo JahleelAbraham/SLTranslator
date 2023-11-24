@@ -18,3 +18,37 @@ landmark_coordinates = []  # Initialize an empty list for storing landmarks
 
     # Optionally, you can return the list
     # return landmark_coordinates
+
+
+def render(triggerModel):
+    _, frame = cap.read()
+
+    # ... [previous processing code]
+
+    landmark_coordinates = []  # Initialize an empty list for storing landmarks
+
+    # Define your reference coordinate (example: (x_ref, y_ref) = (100, 50))
+    x_ref, y_ref = 100, 50
+
+    if hand_landmarks:
+        for handLMs in hand_landmarks:
+            hand_coords = []  # List to store coordinates of a single hand
+
+            for lm in handLMs.landmark:
+                x, y = int(lm.x * w), int(lm.y * h)
+                # Subtract (x_ref, y_ref) from (x, y)
+                adjusted_x, adjusted_y = x - x_ref, y - y_ref
+                hand_coords.append((adjusted_x, adjusted_y))  # Add adjusted landmark coordinates to the list
+
+                # ... [existing bounding box and drawing code]
+
+            landmark_coordinates.append(hand_coords)  # Add this hand's landmarks to the main list
+
+    # ... [rest of the existing code]
+
+    print(landmark_coordinates)  # Print the list of adjusted landmarks
+
+    # Optionally, you can return the list
+    # return landmark_coordinates
+
+# ... [rest of the script]
