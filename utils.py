@@ -12,6 +12,7 @@ def set_seeds(seed):
     np.random.seed(seed)
 
 def predict_by_max_logit(logits):
+    print(logits)
     return torch.argmax(logits, dim=-1)
 
 

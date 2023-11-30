@@ -13,7 +13,9 @@ from train import train
 
 alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M",
             "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"]
+# you forgot Z? or maybe you dont need it idk lmao
 
+# collect()
 # train(10)
 
 transform = transforms.Compose(
@@ -39,7 +41,6 @@ def getModelResult(img):
 
     with torch.no_grad():
         logits = model(signs[0])
-        print(alphabet[predict_by_max_logit(logits)])
         return alphabet[predict_by_max_logit(logits)]
 
 
