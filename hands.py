@@ -32,7 +32,6 @@ def render(triggerModel):
         for handLMs in hand_landmarks:
             for lm in handLMs.landmark:
                 x, y = int(lm.x * w), int(lm.y * h)
-
                 if x > x_max:
                     x_max = x
                 if x < x_min:
@@ -41,39 +40,19 @@ def render(triggerModel):
                     y_max = y
                 if y < y_min:
                     y_min = y
-
-                # height = y_max - y_min
-                # width = x_max - x_min
-                # if height > width:
-                #     normal = (... / height)
-                # else:
-                #     normal = (... / width)
-                for i = 0 to len(hand_landmark)
-
-            rect = cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (0, 255, 0), 2)
-            mp_drawing.draw_landmarks(frame, handLMs, mphands.HAND_CONNECTIONS)
-
-
-            # height = y_max - y_min
-            # width = x_max - x_min
-            # print(width, height)
-            # def subtract_coordinates(hand_landmark, LL):
-            #     LL = (x_min, y_max)
-            #     result = subtract_coordinates(handLMs.hand_landmarks, LL)
-            #     print(result)
-
-
+        rect = cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (0, 255, 0), 2)
+        mp_drawing.draw_landmarks(frame, handLMs, mphands.HAND_CONNECTIONS)
     else:
         rect = None
 
     frame = cv2.flip(frame, 1)
 
-    padding = 25
+    padding = 35
 
     if x_min - padding <= 0 or y_min - padding <= 0 or x_max + padding >= w or y_max + padding >= h:
         cv2.putText(frame, "Please keep your hands in frame!", (25, 50),
-                    cv2.FONT_HERSHEY_COMPLEX, 0.9,
-                    (0, 255, 0), 2)
+            cv2.FONT_HERSHEY_COMPLEX, 0.9,
+            (0, 255, 0), 2)
     else:
         if rect is not None:
             cropped = cv2.flip(cropped[y_min - padding:y_max + padding, x_min - padding:x_max + padding], 1)
@@ -135,41 +114,41 @@ def isolate(img):
 #     x_min = w
 #     y_min = h
 #     if hand_landmarks:
-#         for handLMs in hand_landmarks:
+#     for handLMs in hand_landmarks:
 #
-#             for lm in handLMs.landmark:
-#                 x, y = int(lm.x * w), int(lm.y * h)
-#                 if x > x_max:
-#                     x_max = x
-#                 if x < x_min:
-#                     x_min = x
-#                 if y > y_max:
-#                     y_max = y
-#                 if y < y_min:
-#                     y_min = y
-#             rect = cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (0, 255, 0), 2)
-#             mp_drawing.draw_landmarks(frame, handLMs, mphands.HAND_CONNECTIONS)
+#         for lm in handLMs.landmark:
+#         x, y = int(lm.x * w), int(lm.y * h)
+#         if x > x_max:
+#             x_max = x
+#         if x < x_min:
+#             x_min = x
+#         if y > y_max:
+#             y_max = y
+#         if y < y_min:
+#             y_min = y
+#         rect = cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (0, 255, 0), 2)
+#         mp_drawing.draw_landmarks(frame, handLMs, mphands.HAND_CONNECTIONS)
 #     else:
-#         rect = None
+#     rect = None
 #
 #     frame = cv2.flip(frame, 1)
 #
 #     padding = 35
 #
 #     if x_min - padding <= 0 or y_min - padding <= 0 or x_max + padding >= w or y_max + padding >= h:
-#         cv2.putText(frame, "Please keep your hands in frame!", (25, 50),
-#                     cv2.FONT_HERSHEY_COMPLEX, 0.9,
-#                     (0, 255, 0), 2)
+#     cv2.putText(frame, "Please keep your hands in frame!", (25, 50),
+#             cv2.FONT_HERSHEY_COMPLEX, 0.9,
+#             (0, 255, 0), 2)
 #     else:
-#         if rect is not None:
-#             cropped = cropped[y_min - padding:y_max + padding, x_min - padding:x_max + padding]
-#             cv2.imshow("Cropped",
-#                        cv2.flip(cropped, 1))
+#     if rect is not None:
+#         cropped = cropped[y_min - padding:y_max + padding, x_min - padding:x_max + padding]
+#         cv2.imshow("Cropped",
+#            cv2.flip(cropped, 1))
 #
-#             gray = cv2.cvtColor(cv2.flip(cropped, 1), cv2.COLOR_BGR2GRAY)
-#             resize = cv2.resize(gray, (28, 28))
-#             cv2.putText(frame, triggerModel(resize), (50, 100), cv2.FONT_HERSHEY_COMPLEX, 0.9, (100, 0, 255), 2)
-#             cv2.imshow("Smol", resize)
+#         gray = cv2.cvtColor(cv2.flip(cropped, 1), cv2.COLOR_BGR2GRAY)
+#         resize = cv2.resize(gray, (28, 28))
+#         cv2.putText(frame, triggerModel(resize), (50, 100), cv2.FONT_HERSHEY_COMPLEX, 0.9, (100, 0, 255), 2)
+#         cv2.imshow("Smol", resize)
 #
 #     cv2.rectangle(frame, (0 + padding, 0 + padding), (w - padding, h - padding), (255, 255, 255), 2)
 #     cv2.imshow("Frame", frame)
