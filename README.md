@@ -34,7 +34,7 @@ After learning more about AI & Machine Learning technology, how it works and, wh
 
 **By students from**
 
-![](RackMultipart20231221-1-hx6ozn_html_1e73f8db91a4782a.png)
+[REDACTED FOR PRIVACY]
 
 **With help from John B. from The University of Cambridge**
 
