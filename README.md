@@ -8,29 +8,29 @@ After learning more about AI & Machine Learning technology, how it works and, wh
 
 # Table of Contents
 
-[Summary 1](#_Toc153533771)
+[Summary](#_Toc153533771)
 
-[Introduction 2](#_Toc153533772)
+[Introduction](#_Toc153533772)
 
-[Legal & Ethical 3](#_Toc153533773)
+[Legal & Ethical](#_Toc153533773)
 
-[Ethical Aspects of Neural Networking 3](#_Toc153533774)
+[Ethical Aspects of Neural Networking](#_Toc153533774)
 
-[Legal aspects of Neural Networking 3](#_Toc153533775)
+[Legal aspects of Neural Networking](#_Toc153533775)
 
-[Training the Model 3](#_Toc153533776)
+[Training the Model](#_Toc153533776)
 
-[Finding and Recognising a Hand and Predicting the Sign 5](#_Toc153533777)
+[Finding and Recognising a Hand and Predicting the Sign](#_Toc153533777)
 
-[Dealing with Inaccuracies 6](#_Toc153533778)
+[Dealing with Inaccuracies](#_Toc153533778)
 
-[Suggested Improvements to the Model 6](#_Toc153533779)
+[Suggested Improvements to the Model](#_Toc153533779)
 
-[Suggested Improvements to the Reader 7](#_Toc153533780)
+[Suggested Improvements to the Reader](#_Toc153533780)
 
-[Results 9](#_Toc153533781)
+[Results](#_Toc153533781)
 
-[Conclusion 9](#_Toc153533782)
+[Conclusion](#_Toc153533782)
 
 **By students from**
 
