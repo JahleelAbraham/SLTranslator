@@ -1,6 +1,6 @@
 # Using Machine Learning models to recognise Sign Language
 
-_Jahleel A., Connor R., Bobby A., Isabel H_
+_Jahleel A., Connor R., Bobby A., Oskar. H_
 
 # Summary
 
